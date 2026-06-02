@@ -301,6 +301,9 @@ get_gh_issue_people <- function (org, repo,
         cmts <- lapply (dat, function (i) i$node$comments)
         cmt_dat <- lapply (cmts, function (i) {
             ret <- vapply (i$edges, function (j) {
+                if (length (j$node$author) == 0L) {
+                    return (rep (NA_character_, 2L))
+                }
                 unlist (j$node$author)
             }, character (2L))
             unique (t (ret))
@@ -379,7 +382,10 @@ get_gh_issue_people <- function (org, repo,
     issue_author_avatar <- issue_author_avatar [index]
 
     issue_commenters <- unique (issue_commenters [, c ("login", "avatarUrl")])
-    index <- which (!issue_commenters$login %in% issue_authors)
+    index <- which (
+        !issue_commenters$login %in% issue_authors &
+            !is.na (issue_commenters$login)
+    )
     issue_commenters <- issue_commenters [index, ]
     rownames (issue_commenters) <- NULL
     names (issue_commenters) <- c ("logins", "avatar")
