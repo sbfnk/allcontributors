@@ -352,7 +352,7 @@ get_gh_issue_people <- function (org, repo,
         }
 
         exclude_issues <- which (issue_numbers %in% exclude_issues)
-        issue_numbers <- issue_numbers [-exlude_issues]
+        issue_numbers <- issue_numbers [-exclude_issues]
         issue_authors <- issue_authors [-exclude_issues]
         issue_author_avatar <- issue_author_avatar [-exclude_issues]
 
