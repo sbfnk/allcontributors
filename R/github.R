@@ -209,17 +209,16 @@ get_issues_qry <- function (org, repo, end_cursor = NULL) {
                                    }
                                    stateReason
                                    url
-                                   participants (first: 100) {
-                                       pageInfo {
-                                           hasNextPage
-                                           endCursor
-                                       }
+                                   comments (first: 100) {
                                        edges {
                                            node {
-                                               login
-                                               avatarUrl
+                                               author {
+                                                   login
+                                                   avatarUrl
+                                               }
                                            }
                                        }
+                                       totalCount
                                    }
                                }
                            }
@@ -255,7 +254,7 @@ get_gh_issue_people <- function (org, repo,
     end_cursor <- NULL
     issue_authors <- issue_numbers <- issue_author_avatar <-
         issue_state_reason <- NULL
-    issue_contributors <- issue_contributors_avatar <- issue_labels <- list ()
+    issue_commenters <- issue_labels <- list ()
 
     while (has_next_page) {
 
@@ -298,20 +297,24 @@ get_gh_issue_people <- function (org, repo,
             }, character (1L))
         )
 
-        author_login <- lapply (dat, function (i) {
-            edges <- i$node$participants$edges
-            unlist (lapply (edges, function (j) j$node$login))
+        # ------ Issue commenters:
+        cmts <- lapply (dat, function (i) i$node$comments)
+        cmt_dat <- lapply (cmts, function (i) {
+            ret <- vapply (i$edges, function (j) {
+                unlist (j$node$author)
+            }, character (2L))
+            unique (t (ret))
         })
-        author_avatar <- lapply (dat, function (i) {
-            edges <- i$node$participants$edges
-            unlist (lapply (edges, function (j) j$node$avatarUrl))
+        cmt_iss_num <- vapply (dat, function (i) i$node$number, integer (1L))
+        cmt_dat <- lapply (seq_along (dat), function (i) {
+            if (nrow (cmt_dat [[i]]) == 0L) {
+                return (NULL)
+            }
+            cbind (number = cmt_iss_num [i], cmt_dat [[i]])
         })
-
-        issue_contributors <- c (issue_contributors, author_login)
-        issue_contributors_avatar <- c (
-            issue_contributors_avatar,
-            author_avatar
-        )
+        cmt_dat <- data.frame (do.call (rbind, cmt_dat))
+        storage.mode (cmt_dat$number) <- "integer"
+        issue_commenters [[length (issue_commenters) + 1]] <- cmt_dat
 
         these_labels <- lapply (dat, function (i) {
             out <- i$node$labels$edges
@@ -324,14 +327,19 @@ get_gh_issue_people <- function (org, repo,
         issue_labels <- c (issue_labels, these_labels)
     }
 
+    issue_commenters <- do.call (rbind, issue_commenters)
+
     # rm any issues closed as "not planned"
     not_planned <- which (issue_state_reason == "NOT_PLANNED")
+    issue_nums_to_rm <- issue_numbers [not_planned]
     if (exclude_not_planned && length (not_planned) > 0L) {
         issue_numbers <- issue_numbers [-not_planned]
         issue_authors <- issue_authors [-not_planned]
         issue_author_avatar <- issue_author_avatar [-not_planned]
-        issue_contributors <- issue_contributors [-not_planned]
-        issue_contributors_avatar <- issue_contributors_avatar [-not_planned]
+        issue_state_reason <- issue_state_reason [-not_planned]
+
+        index <- which (!issue_commenters$number %in% issue_nums_to_rm)
+        issue_commenters <- issue_commenters [index, ]
     }
 
     if (!is.null (exclude_issues)) {
@@ -341,10 +349,12 @@ get_gh_issue_people <- function (org, repo,
         }
 
         exclude_issues <- which (issue_numbers %in% exclude_issues)
+        issue_numbers <- issue_numbers [-exlude_issues]
         issue_authors <- issue_authors [-exclude_issues]
         issue_author_avatar <- issue_author_avatar [-exclude_issues]
-        issue_contributors <- issue_contributors [-exclude_issues]
-        issue_contributors_avatar <- issue_contributors_avatar [-exclude_issues]
+
+        index <- which (!issue_commenters$number %in% exclude_issues)
+        issue_commenters <- issue_commenters [index, ]
     }
 
     if (is.null (exclude_label)) {
@@ -355,10 +365,12 @@ get_gh_issue_people <- function (org, repo,
         index <- which (vapply (issue_labels, function (i) {
             !any (i %in% exclude_label)
         }, logical (1L)))
+        issue_numbers <- issue_numbers [index]
         issue_authors <- issue_authors [index]
         issue_author_avatar <- issue_author_avatar [index]
-        issue_contributors <- issue_contributors [index]
-        issue_contributors_avatar <- issue_contributors_avatar [index]
+
+        index <- which (issue_commenters$number %in% issue_numbers)
+        issue_commenters <- issue_commenters [index, ]
     }
 
     index <- which (!duplicated (issue_authors) &
@@ -366,12 +378,11 @@ get_gh_issue_people <- function (org, repo,
     issue_authors <- issue_authors [index]
     issue_author_avatar <- issue_author_avatar [index]
 
-    issue_contributors <- unlist (issue_contributors)
-    issue_contributors_avatar <- unlist (issue_contributors_avatar)
-    index <- which (!(duplicated (issue_contributors) |
-        issue_contributors %in% issue_authors))
-    issue_contributors <- issue_contributors [index]
-    issue_contributors_avatar <- issue_contributors_avatar [index]
+    issue_commenters <- unique (issue_commenters [, c ("login", "avatarUrl")])
+    index <- which (!issue_commenters$login %in% issue_authors)
+    issue_commenters <- issue_commenters [index, ]
+    rownames (issue_commenters) <- NULL
+    names (issue_commenters) <- c ("logins", "avatar")
 
     list (
         authors = data.frame (
@@ -379,11 +390,7 @@ get_gh_issue_people <- function (org, repo,
             avatar = issue_author_avatar,
             stringsAsFactors = FALSE
         ),
-        contributors = data.frame (
-            logins = issue_contributors,
-            avatar = issue_contributors_avatar,
-            stringsAsFactors = FALSE
-        )
+        contributors = issue_commenters
     )
 }
 

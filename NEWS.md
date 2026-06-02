@@ -1,5 +1,9 @@
 # v0.2.3.00X (current dev version)
 
+## Minor changes
+
+- Bug fix in contributor extraction (#63; thanks to @kellijohnson-NOAA). Contributors changed from GH API lists of "participants" to identified "authors" of issue comments only.
+
 ---
 
 # v0.2.3
