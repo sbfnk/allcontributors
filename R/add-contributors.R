@@ -368,7 +368,7 @@ add_contribs_to_one_file <- function (ctbs, orgrepo, ncols, format, filename) {
                 paste0 (rep ("-", sec_fmt), collapse = "")
             )
         }
-        xmid <- c ("", xmid, "")
+        xmid <- c ("", xmid)
     }
 
     xmid <- c (
@@ -378,7 +378,9 @@ add_contribs_to_one_file <- function (ctbs, orgrepo, ncols, format, filename) {
             "<!-- ALL-CONTRIBUTORS-LIST:START - ",
             "Do not remove or modify this section -->"
         ),
+        "",
         "<!-- prettier-ignore-start -->",
+        "",
         "<!-- markdownlint-disable -->",
         "",
         paste0 (
@@ -418,7 +420,9 @@ add_contribs_to_one_file <- function (ctbs, orgrepo, ncols, format, filename) {
 
     xmid <- c (
         xmid, "<!-- markdownlint-enable -->",
+        "",
         "<!-- prettier-ignore-end -->",
+        "",
         "<!-- ALL-CONTRIBUTORS-LIST:END -->",
         ""
     )
