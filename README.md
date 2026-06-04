@@ -232,139 +232,73 @@ project, you agree to abide by its terms.
 
 ## Contributors
 
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore-start -->
-
 <!-- markdownlint-disable -->
 
-All contributions to this project are gratefully acknowledged using the
-[`allcontributors` package](https://github.com/ropensci/allcontributors)
-following the [allcontributors](https://allcontributors.org)
-specification. Contributions of any kind are welcome!
-
-### Code
+All contributions to this project are gratefully acknowledged using the [`allcontributors` package](https://github.com/ropensci/allcontributors) following the [allcontributors](https://allcontributors.org) specification. Contributions of any kind are welcome!
 
 <table>
 
 <tr>
-
 <td align="center">
-
 <a href="https://github.com/mpadge">
 <img src="https://avatars.githubusercontent.com/u/6697851?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=mpadge">mpadge</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=mpadge">mpadge</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/chartgerink">
 <img src="https://avatars.githubusercontent.com/u/2946344?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=chartgerink">chartgerink</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=chartgerink">chartgerink</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/maelle">
 <img src="https://avatars.githubusercontent.com/u/8360597?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=maelle">maelle</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=maelle">maelle</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/iantaylor-NOAA">
 <img src="https://avatars.githubusercontent.com/u/4992918?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=iantaylor-NOAA">iantaylor-NOAA</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=iantaylor-NOAA">iantaylor-NOAA</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/maurolepore">
 <img src="https://avatars.githubusercontent.com/u/5856545?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=maurolepore">maurolepore</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=maurolepore">maurolepore</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/milanmlft">
 <img src="https://avatars.githubusercontent.com/u/38256462?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=milanmlft">milanmlft</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=milanmlft">milanmlft</a>
 </td>
-
 <td align="center">
-
 <a href="https://github.com/SaranjeetKaur">
 <img src="https://avatars.githubusercontent.com/u/28556616?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=SaranjeetKaur">SaranjeetKaur</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=SaranjeetKaur">SaranjeetKaur</a>
 </td>
-
 </tr>
 
+
 <tr>
-
 <td align="center">
-
 <a href="https://github.com/sbfnk">
 <img src="https://avatars.githubusercontent.com/u/1156307?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/ropensci/allcontributors/commits?author=sbfnk">sbfnk</a>
+<a href="https://github.com/sbfnk/allcontributors/commits?author=sbfnk">sbfnk</a>
 </td>
-
-</tr>
-
-</table>
-
-### Issues
-
-<table>
-
-<tr>
-
-<td align="center">
-
-<a href="https://github.com/shamindras">
-<img src="https://avatars.githubusercontent.com/u/7627188?u=d05fb551796e6ce6db64ae43cd8ce48a0217ef85&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/ropensci/allcontributors/issues?q=is%3Aissue+author%3Ashamindras">shamindras</a>
-</td>
-
-<td align="center">
-
-<a href="https://github.com/assignUser">
-<img src="https://avatars.githubusercontent.com/u/16141871?u=b8095df6a10813031922a72335bd6579d5494c16&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/ropensci/allcontributors/issues?q=is%3Aissue+author%3AassignUser">assignUser</a>
-</td>
-
-<td align="center">
-
-<a href="https://github.com/RichardLitt">
-<img src="https://avatars.githubusercontent.com/u/910753?u=a638615a7167b368f0c102aa2047cef15b0ce9cc&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/ropensci/allcontributors/issues?q=is%3Aissue+author%3ARichardLitt">RichardLitt</a>
-</td>
-
-<td align="center">
-
-<a href="https://github.com/kellijohnson-NOAA">
-<img src="https://avatars.githubusercontent.com/u/4108564?u=503d9aecc5fadf069c75e493e5abf72c7537b06f&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/ropensci/allcontributors/issues?q=is%3Aissue+author%3Akellijohnson-NOAA">kellijohnson-NOAA</a>
-</td>
-
 </tr>
 
 </table>
 
 <!-- markdownlint-enable -->
-
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
