@@ -429,8 +429,7 @@ add_contribs_to_one_file <- function (ctbs, orgrepo, ncols, format, filename) {
 
     txt <- c (xtop, xmid, xbottom)
 
-    newlines <- txt [which (!txt %in% x)]
-    changed <- any (nchar (newlines) > 0)
+    changed <- !identical (txt, x)
 
     if (changed) {
         con <- file (filename, "w")
