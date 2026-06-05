@@ -357,13 +357,10 @@ add_contribs_to_one_file <- function (ctbs, orgrepo, ncols, format, filename) {
         }
     }
 
-    # Drop blank lines directly adjoining the list. This prevents those blanks accumulating each time `add_contributors()` re-reads its own output.
-    while (length (xtop) > 0 && xtop [length (xtop)] == "") {
-        xtop <- xtop [-length (xtop)]
-    }
-    while (length (xbottom) > 0 && xbottom [1] == "") {
-        xbottom <- xbottom [-1]
-    }
+    # Drop blank lines directly adjoining the list. This prevents those blanks
+    # accumulating each time `add_contributors()` re-reads its own output.
+    xtop <- trim_nzchar (xtop, start = FALSE)
+    xbottom <- trim_nzchar (xbottom, start = TRUE)
 
     xmid <- NULL
     if (!has_contribs_sec (x)) {
